@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-3">
+
+        <div class="list-group">
+
+            <a
+                href="/"
+                class="list-group-item"
+            >
+                Resume
+            </a>
+
+            <a
+                href="/contacts"
+                class="list-group-item"
+            >
+                Contacts
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="col-9">
+
+        <h1>{{ name.upper() }}</h1>
+
+        <h3>Age: {{ age }}</h3>
+
+    </div>
+
+</div>
+
+{% endblock %}
