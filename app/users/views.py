@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
+from app.forms import LoginForm
 
 users = Blueprint(
     'users',
@@ -33,21 +34,33 @@ def admin():
 @users.route('/login', methods=['GET', 'POST'])
 def login():
     theme = request.cookies.get('theme', 'light')
+    form = LoginForm()
 
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        remember = form.remember.data
 
         if username == 'user1' and password == '12345':
             session['username'] = username
-            flash('Login successful!', 'success')
+
+            if remember:
+                flash('Login successful! Remember option is selected.', 'success')
+            else:
+                flash('Login successful! Remember option is not selected.', 'success')
+
             return redirect(url_for('users.profile'))
 
-        flash('Wrong data! Try again!', 'danger')
+        flash('Wrong username or password!', 'danger')
+        return redirect(url_for('users.login'))
+
+    if request.method == 'POST':
+        flash('Login form has errors!', 'danger')
 
     return render_template(
         'users/login.html',
         title='Login',
+        form=form,
         theme=theme
     )
 

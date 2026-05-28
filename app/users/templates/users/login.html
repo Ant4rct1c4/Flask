@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
 
+{% from '_render_field.html' import render_field %}
+
 {% block content %}
 
 <h1 class="text-center mb-4">Login</h1>
 
-<form method="POST" class="mx-auto" style="max-width: 400px;">
+<form method="POST" novalidate class="mx-auto" style="max-width: 400px;">
 
-    <div class="mb-3">
-        <label class="form-label">User name</label>
-        <input type="text" name="username" class="form-control">
+    {{ form.csrf_token }}
+
+    {{ render_field(form.username) }}
+    {{ render_field(form.password) }}
+
+    <div class="form-check mb-3">
+        {{ form.remember(class="form-check-input") }}
+        {{ form.remember.label(class="form-check-label") }}
     </div>
 
-    <div class="mb-3">
-        <label class="form-label">Password</label>
-        <input type="password" name="password" class="form-control">
-    </div>
-
-    <button class="btn btn-primary w-100">
-        Sign in
-    </button>
+    {{ form.submit(class="btn btn-primary w-100") }}
 
 </form>
 
