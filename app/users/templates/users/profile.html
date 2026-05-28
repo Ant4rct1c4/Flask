@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="p-4 rounded profile-box">
+
+    <h1>Welcome, {{ username }}!</h1>
+
+    <a href="{{ url_for('users.logout') }}" class="btn btn-danger mb-3">
+        Logout
+    </a>
+
+    <h3>Theme</h3>
+
+    <a href="{{ url_for('users.set_theme', theme='light') }}" class="btn btn-outline-primary">
+        Light
+    </a>
+
+    <a href="{{ url_for('users.set_theme', theme='dark') }}" class="btn btn-outline-light">
+        Dark
+    </a>
+
+    <hr>
+
+    <h3>Add cookie</h3>
+
+    <form method="POST" action="{{ url_for('users.add_cookie') }}" class="row g-3">
+
+        <div class="col-md-4">
+            <input type="text" name="key" class="form-control" placeholder="Cookie key">
+        </div>
+
+        <div class="col-md-4">
+            <input type="text" name="value" class="form-control" placeholder="Cookie value">
+        </div>
+
+        <div class="col-md-4">
+            <input type="number" name="max_age" class="form-control" placeholder="Time in seconds">
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-success">Add cookie</button>
+        </div>
+
+    </form>
+
+    <hr>
+
+    <h3>Delete cookie by key</h3>
+
+    <form method="POST" action="{{ url_for('users.delete_cookie') }}">
+        <input type="text" name="key" class="form-control mb-2" placeholder="Cookie key">
+        <button class="btn btn-warning">Delete cookie</button>
+    </form>
+
+    <hr>
+
+    <a href="{{ url_for('users.delete_all_cookies') }}" class="btn btn-danger">
+        Delete all cookies
+    </a>
+
+    <hr>
+
+    <h3>Current cookies</h3>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+
+        {% for key, value in cookies.items() %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+{% endblock %}
