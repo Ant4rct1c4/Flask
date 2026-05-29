@@ -166,3 +166,13 @@
 2026-05-29 13:20:07,322 - 127.0.0.1 - - [29/May/2026 13:20:07] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
 2026-05-29 13:20:07,323 - 127.0.0.1 - - [29/May/2026 13:20:07] "[36mGET /post/static/css/posts.css HTTP/1.1[0m" 304 -
 2026-05-29 13:20:07,323 - 127.0.0.1 - - [29/May/2026 13:20:07] "[36mGET /post/static/img/default.jpg HTTP/1.1[0m" 304 -
+2026-05-29 14:14:58,853 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-05-29 14:14:58,853 - [33mPress CTRL+C to quit[0m
+2026-05-29 14:14:58,856 -  * Restarting with stat
+2026-05-29 14:14:59,596 -  * Debugger is active!
+2026-05-29 14:14:59,601 -  * Debugger PIN: 784-397-542
+2026-05-29 14:15:35,019 - 127.0.0.1 - - [29/May/2026 14:15:35] "GET /post/ HTTP/1.1" 200 -
+2026-05-29 14:15:35,170 - 127.0.0.1 - - [29/May/2026 14:15:35] "[36mGET /post/static/css/posts.css HTTP/1.1[0m" 304 -
+2026-05-29 14:15:35,173 - 127.0.0.1 - - [29/May/2026 14:15:35] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2026-05-29 14:15:35,174 - 127.0.0.1 - - [29/May/2026 14:15:35] "[36mGET /post/static/img/default.jpg HTTP/1.1[0m" 304 -

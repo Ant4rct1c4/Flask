@@ -1,11 +1,27 @@
+import os
+
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from sqlalchemy import MetaData
+from sqlalchemy.orm import DeclarativeBase
 
 from app.config import config
 
 
-db = SQLAlchemy()
+class Base(DeclarativeBase):
+    metadata = MetaData(
+        naming_convention={
+            "ix": "ix_%(column_0_label)s",
+            "uq": "uq_%(table_name)s_%(column_0_name)s",
+            "ck": "ck_%(table_name)s_%(constraint_name)s",
+            "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+            "pk": "pk_%(table_name)s"
+        }
+    )
+
+
+db = SQLAlchemy(model_class=Base)
 migrate = Migrate()
 
 
@@ -20,6 +36,9 @@ def create_app(config_name='development'):
     db.init_app(app)
     migrate.init_app(app, db)
 
+    from app.posts import models as post_models
+    from app.products import models as product_models
+
     from app.views import main_bp
     from app.users.views import users
     from app.products.views import products
@@ -32,10 +51,12 @@ def create_app(config_name='development'):
 
     @app.errorhandler(404)
     def not_found(error):
+        theme = 'light'
+
         return render_template(
             '404.html',
             title='Page not found',
-            theme='light'
+            theme=theme
         ), 404
 
     return app
