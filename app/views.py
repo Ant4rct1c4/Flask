@@ -1,8 +1,13 @@
 import logging
 
-from flask import render_template, request, redirect, url_for, flash
-from app import app
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from app.forms import ContactForm
+
+
+main_bp = Blueprint(
+    'main',
+    __name__
+)
 
 
 logging.basicConfig(
@@ -12,7 +17,7 @@ logging.basicConfig(
 )
 
 
-@app.route('/')
+@main_bp.route('/')
 def resume():
     theme = request.cookies.get('theme', 'light')
 
@@ -23,8 +28,8 @@ def resume():
     )
 
 
-@app.route('/contacts', methods=['GET', 'POST'])
-@app.route('/contact', methods=['GET', 'POST'])
+@main_bp.route('/contacts', methods=['GET', 'POST'])
+@main_bp.route('/contact', methods=['GET', 'POST'])
 def contacts():
     theme = request.cookies.get('theme', 'light')
     form = ContactForm()
@@ -41,7 +46,7 @@ def contacts():
             'success'
         )
 
-        return redirect(url_for('contacts'))
+        return redirect(url_for('main.contacts'))
 
     if request.method == 'POST':
         flash('Form has errors. Please check your data.', 'danger')

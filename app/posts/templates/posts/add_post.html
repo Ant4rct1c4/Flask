@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% from '_render_field.html' import render_field %}
+
+{% block content %}
+
+<h1 class="mb-4">
+    {{ page_title }}
+</h1>
+
+<form method="POST" novalidate class="post-form">
+
+    {{ form.csrf_token }}
+
+    {{ render_field(form.title) }}
+
+    {{ render_field(form.content) }}
+
+    <div class="form-check mb-3">
+        {{ form.is_active(class="form-check-input") }}
+        {{ form.is_active.label(class="form-check-label") }}
+    </div>
+
+    {{ render_field(form.publish_date) }}
+
+    {{ render_field(form.category) }}
+
+    {{ form.submit(class="btn btn-success") }}
+
+    <a
+        href="{{ url_for('posts.all_posts') }}"
+        class="btn btn-secondary"
+    >
+        Back to Posts
+    </a>
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+.post-card {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.post-img {
+    height: 180px;
+    object-fit: cover;
+}
+
+.post-form {
+    max-width: 650px;
+}
+
+.dark-theme .post-card {
+    background-color: #1f2326;
+    color: white;
+    border: 1px solid #444;
+}
+
+.dark-theme .post-detail {
+    background-color: #1f2326;
+    padding: 25px;
+    border-radius: 12px;
+}

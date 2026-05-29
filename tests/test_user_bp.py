@@ -1,17 +1,26 @@
 import unittest
 
-from app import app
+from app import create_app, db
+
 
 class FlaskAppTestCase(unittest.TestCase):
 
     def setUp(self):
+        self.app = create_app('testing')
 
-        app.config['TESTING'] = True
+        self.app_context = self.app.app_context()
+        self.app_context.push()
 
-        self.client = app.test_client()
+        db.create_all()
+
+        self.client = self.app.test_client()
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+        self.app_context.pop()
 
     def test_greetings_page(self):
-
         response = self.client.get(
             '/users/hi/John?age=30'
         )
@@ -32,7 +41,6 @@ class FlaskAppTestCase(unittest.TestCase):
         )
 
     def test_admin_page(self):
-
         response = self.client.get(
             '/users/admin',
             follow_redirects=True
@@ -52,6 +60,7 @@ class FlaskAppTestCase(unittest.TestCase):
             b'45',
             response.data
         )
+
 
 if __name__ == '__main__':
     unittest.main()

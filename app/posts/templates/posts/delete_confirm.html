@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="text-center mt-5">
+
+    <h1>Delete Post</h1>
+
+    <p>
+        Are you sure you want to delete post:
+        <strong>{{ post.title }}</strong>?
+    </p>
+
+    <form method="POST">
+
+        <button
+            type="submit"
+            class="btn btn-danger"
+        >
+            Yes, delete
+        </button>
+
+        <a
+            href="{{ url_for('posts.detail_post', id=post.id) }}"
+            class="btn btn-secondary"
+        >
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}
